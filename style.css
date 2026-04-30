@@ -91,6 +91,15 @@ a:hover { color: var(--accent-hover); }
   color: var(--accent);
   font-weight: 600;
 }
+.topnav a.coffee-link {
+  background: #ffdd00;
+  color: #2a1a05;
+  font-weight: 600;
+}
+.topnav a.coffee-link:hover {
+  background: #ffe43a;
+  color: #2a1a05;
+}
 
 .topbar-actions {
   display: flex;
