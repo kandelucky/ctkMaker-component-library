@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CTkMaker Hub — Community components for CTkMaker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="notice" role="status">
+    <strong>Beta —</strong> free upload and download, no registration. Policy may change later.
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <h1>CTkMaker Hub</h1>
+      <p class="tagline">Community components for CTkMaker</p>
+    </div>
+    <a class="github-link" href="https://github.com/kandelucky/ctkMaker-component-library" target="_blank" rel="noopener">
+      View on GitHub
+    </a>
+  </header>
+
+  <section class="controls">
+    <input
+      id="search"
+      class="search"
+      type="text"
+      placeholder="Search components..."
+      autocomplete="off"
+    />
+    <select id="sort" class="sort" aria-label="Sort components">
+      <option value="featured">Featured</option>
+      <option value="newest">Newest</option>
+      <option value="name">Name (A-Z)</option>
+    </select>
+    <div id="categories" class="categories"></div>
+  </section>
+
+  <main id="grid" class="grid" aria-busy="true">
+    <p class="loading">Loading components...</p>
+  </main>
+
+  <footer class="footer">
+    <p>
+      Want to share a component?
+      <a href="https://github.com/kandelucky/ctkMaker-component-library/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">
+        Read the contribution guide
+      </a>.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
