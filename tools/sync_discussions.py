@@ -69,11 +69,14 @@ CTKCOMP_RE = re.compile(
     re.IGNORECASE,
 )
 IMAGE_MD_RE = re.compile(
-    r"!\[[^\]\n]*\]\((https?://[^\s)]+\.(?:png|jpe?g|gif|webp))\)",
+    # Match either an explicit image extension OR a GitHub
+    # user-attachment URL — the latter strips extensions from the
+    # public link, so a `.png` filename is rendered as ``/assets/<uuid>``.
+    r"!\[[^\]\n]*\]\((https?://[^\s)]+(?:\.(?:png|jpe?g|gif|webp)|/user-attachments/assets/[^\s)]+))\)",
     re.IGNORECASE,
 )
 IMAGE_HTML_RE = re.compile(
-    r'<img[^>]+src="(https?://[^"]+\.(?:png|jpe?g|gif|webp))"',
+    r'<img[^>]+src="(https?://[^"]+(?:\.(?:png|jpe?g|gif|webp)|/user-attachments/assets/[^"]+))"',
     re.IGNORECASE,
 )
 USER_ASSET_RE = re.compile(
