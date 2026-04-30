@@ -56,5 +56,28 @@
       "description": "Anything that doesn't fit the other categories."
     }
   ],
-  "components": []
+  "components": [
+    {
+      "id": "d3_loginform",
+      "name": "LoginForm",
+      "category": "forms",
+      "author": "Lasha",
+      "version": "1.0",
+      "description": "Login form for first component test",
+      "file": "https://github.com/user-attachments/files/27257843/LoginForm.zip",
+      "preview": "https://github.com/user-attachments/assets/79465a77-0508-4031-b603-1c70fc0a979b",
+      "size_px": "439x530",
+      "size_kb": 0,
+      "added_at": "2026-04-30",
+      "discussion_url": "https://github.com/kandelucky/ctk_maker/discussions/3",
+      "likes": 0,
+      "comments": 0,
+      "license": {
+        "type": "MIT",
+        "accepted_by": "Lasha",
+        "accepted_at": "2026-04-30T19:09:34Z",
+        "text_version": 1
+      }
+    }
+  ]
 }
