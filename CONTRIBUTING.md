@@ -7,17 +7,16 @@ component in the right Discussion category and the site picks it up.
 ## Quick steps
 
 1. **Build your component** in CTkMaker. Right-click the selection
-   → "Save as component…", then "Export…" to drop a `.ctkcomp` file
-   somewhere accessible.
-2. **Take a screenshot** of the component on canvas. Save it as PNG.
-3. Open https://github.com/kandelucky/ctk_maker/discussions/new?category=components
-4. The form asks for:
-   - **Component type** — pick the category
-   - **Display name** — what shows on the card (e.g. *Neon Button*)
-   - **Description** — one short line
-   - **Files** — drag your `.ctkcomp` and the screenshot directly into the box.
-     GitHub will replace the drag with download links automatically.
-5. **Start discussion.** Within ~30 minutes the card appears on the
+   → "Save as component…".
+2. **Click "Publish to Community"** on the component. Sign the license
+   agreement, pick the category, write the one-line description.
+   The Builder writes everything into the `.ctkcomp` file directly.
+3. **Take a screenshot** of the component on canvas. Save it as PNG.
+4. Open https://github.com/kandelucky/ctk_maker/discussions/new?category=components
+5. **Drag your two files** into the post (`.ctkcomp` + screenshot).
+   You don't fill in name, category, or description — the file already
+   has them.
+6. **Start discussion.** Within ~30 minutes the card appears on the
    [CTkMaker Hub](https://kandelucky.github.io/ctkMaker-component-library/).
 
 ## Rules

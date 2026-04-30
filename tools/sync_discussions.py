@@ -239,14 +239,26 @@ def discussion_to_entry(d: dict, token: str) -> dict | None:
     if title.lower().startswith("[component]"):
         title = title[len("[component]"):].strip()
 
+    # The .ctkcomp file is the source of truth — Publish flow embeds
+    # name/category/description directly in component.json. Form
+    # sections stay as a fallback so legacy posts (form-only) still
+    # render until they're re-published.
     name = (
-        sections.get("display name")
-        or payload.get("name")
+        payload.get("name")
+        or sections.get("display name")
         or title
         or "Untitled"
     )
-    category = (sections.get("component type") or "").strip().lower() or "templates"
-    description = sections.get("description") or ""
+    category = (
+        (payload.get("category") or "").strip()
+        or (sections.get("component type") or "").strip()
+        or "Other"
+    ).lower()
+    description = (
+        payload.get("description")
+        or sections.get("description")
+        or ""
+    )
 
     author = (
         lic["accepted_by"]
