@@ -58,7 +58,14 @@ query($owner: String!, $name: String!, $cursor: String) {
 """
 
 CTKCOMP_RE = re.compile(
-    r"\[([^\]\n]+\.ctkcomp)\]\((https?://[^\s)]+)\)",
+    # Match the GitHub-attachment markdown link to a component zip in
+    # any of the three accepted extensions: bare ``.ctkcomp`` (legacy
+    # / hand-renamed), ``.ctkcomp.zip`` (canonical — Builder's Publish
+    # writes this so GitHub Discussions accepts the upload), or plain
+    # ``.zip`` (fallback). Validity is checked at fetch time anyway,
+    # so a wider regex is safe — wrong matches just fail the zip /
+    # component.json check downstream.
+    r"\[([^\]\n]+?\.(?:ctkcomp(?:\.zip)?|zip))\]\((https?://[^\s)]+)\)",
     re.IGNORECASE,
 )
 IMAGE_MD_RE = re.compile(
@@ -210,19 +217,30 @@ def discussion_to_entry(d: dict, token: str) -> dict | None:
     body = d.get("body") or ""
     sections = parse_form_sections(body)
 
-    ctkcomp_match = CTKCOMP_RE.search(body)
-    if not ctkcomp_match:
+    # Accept multiple zip-like attachments per post and pick the first
+    # one that opens as a valid component — lets a poster attach a
+    # plain screenshot zip alongside the real component without the
+    # post getting skipped.
+    candidates = CTKCOMP_RE.findall(body)
+    if not candidates:
         return None
-    ctkcomp_url = ctkcomp_match.group(2)
 
-    payload = fetch_component_metadata(ctkcomp_url, token)
+    payload = None
+    ctkcomp_url = ""
+    for _name, url in candidates:
+        candidate_payload = fetch_component_metadata(url, token)
+        if candidate_payload is None:
+            continue
+        if license_summary(candidate_payload) is None:
+            continue
+        payload = candidate_payload
+        ctkcomp_url = url
+        break
+
     if payload is None:
-        print(f"  skip d#{d.get('number')}: component.json unreadable")
+        print(f"  skip d#{d.get('number')}: no valid signed component zip")
         return None
     lic = license_summary(payload)
-    if lic is None:
-        print(f"  skip d#{d.get('number')}: missing/invalid license block")
-        return None
 
     preview_url = ""
     img_md = IMAGE_MD_RE.search(body)
