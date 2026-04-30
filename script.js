@@ -136,8 +136,10 @@ function renderCard(c) {
     // empty placeholder text underneath.
     preview.style.backgroundImage = `url("${c.preview}")`;
     preview.textContent = "";
+    preview.addEventListener("click", () => openLightbox(c.preview));
   } else {
     preview.textContent = "no preview";
+    preview.dataset.empty = "true";
   }
   card.appendChild(preview);
 
@@ -255,6 +257,35 @@ $search.addEventListener("input", (e) => {
 $sort.addEventListener("change", (e) => {
   state.sortBy = e.target.value;
   renderGrid();
+});
+
+// ---------- Lightbox ----------
+const $lightbox = document.getElementById("lightbox");
+const $lightboxImg = document.getElementById("lightbox-img");
+const $lightboxClose = document.getElementById("lightbox-close");
+
+function openLightbox(src) {
+  $lightboxImg.src = src;
+  $lightbox.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  $lightbox.hidden = true;
+  $lightboxImg.src = "";
+  document.body.style.overflow = "";
+}
+
+$lightbox.addEventListener("click", (e) => {
+  // Click on the background OR the image both close — image already
+  // fills as much room as it can, the user expects another click to
+  // dismiss.
+  if (e.target === $lightboxClose) return;
+  closeLightbox();
+});
+$lightboxClose.addEventListener("click", closeLightbox);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !$lightbox.hidden) closeLightbox();
 });
 
 loadIndex();

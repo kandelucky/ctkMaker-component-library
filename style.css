@@ -218,7 +218,45 @@ a:hover { color: var(--accent-hover); }
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  cursor: zoom-in;
 }
+.card .preview[data-empty="true"] {
+  cursor: default;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  cursor: zoom-out;
+}
+.lightbox[hidden] { display: none; }
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 8px 12px;
+  opacity: 0.8;
+}
+.lightbox-close:hover { opacity: 1; }
 
 .card .body {
   padding: 12px 14px 14px 14px;
