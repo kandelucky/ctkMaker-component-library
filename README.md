@@ -2,7 +2,7 @@
 
 Community library of reusable components (`.ctkcomp`) for [CTkMaker](https://github.com/kandelucky/ctk_maker).
 
-**Browse the library:** [kandelucky.github.io/ctkMaker-component-library](https://kandelucky.github.io/ctkMaker-component-library)
+**Browse the library:** [kandelucky.github.io/ctkmaker-hub](https://kandelucky.github.io/ctkmaker-hub)
 
 ## How it works
 
@@ -29,7 +29,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the short version.
 kandelucky/ctk_maker  (Components category)
         │
         ▼  (GitHub Action, every 30 min)
-ctkMaker-component-library/index.json
+ctkmaker-hub/index.json
         │
         ▼
 GitHub Pages site → grid of cards

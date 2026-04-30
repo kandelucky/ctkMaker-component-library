@@ -17,7 +17,7 @@ component in the right Discussion category and the site picks it up.
    You don't fill in name, category, or description — the file already
    has them.
 6. **Start discussion.** Within ~30 minutes the card appears on the
-   [CTkMaker Hub](https://kandelucky.github.io/ctkMaker-component-library/).
+   [CTkMaker Hub](https://kandelucky.github.io/ctkmaker-hub/).
 
 ## Rules
 
