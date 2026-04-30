@@ -5,13 +5,56 @@
     "tagline": "Community components for CTkMaker"
   },
   "categories": [
-    "buttons",
-    "inputs",
-    "display",
-    "layout",
-    "navigation",
-    "feedback",
-    "templates"
+    {
+      "id": "buttons",
+      "name": "Buttons",
+      "description": "Stylized buttons — icon buttons, toggle packs, action button groups."
+    },
+    {
+      "id": "inputs",
+      "name": "Inputs",
+      "description": "Entry, Combobox, Checkbox, Slider variations — styled or with extended functionality."
+    },
+    {
+      "id": "forms",
+      "name": "Forms",
+      "description": "Multi-field configurations — login, signup, settings panels, contact forms."
+    },
+    {
+      "id": "layout",
+      "name": "Layout",
+      "description": "Grid / row / column containers, splitters, scroll areas — reusable layout primitives."
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "description": "Sidebars, top bars, tab strips, breadcrumbs, menu drawers."
+    },
+    {
+      "id": "dialogs & modals",
+      "name": "Dialogs & Modals",
+      "description": "Alerts, confirm dialogs, file pickers, settings popups, full-screen modals."
+    },
+    {
+      "id": "cards & panels",
+      "name": "Cards & Panels",
+      "description": "Info cards, profile cards, stat tiles, collapsible panels — visual containers with content."
+    },
+    {
+      "id": "mini-apps",
+      "name": "Mini-Apps",
+      "description": "Full small applications — todos, calculators, calendars, music players."
+    },
+    {
+      "id": "templates & starters",
+      "name": "Templates & Starters",
+      "description": "Empty skeletons for new projects — sidebar+content shells, tab-based shells, blank window with menu."
+    },
+    {
+      "id": "other",
+      "name": "Other",
+      "description": "Anything that doesn't fit the other categories."
+    }
   ],
   "components": []
 }

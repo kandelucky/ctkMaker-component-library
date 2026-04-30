@@ -27,8 +27,17 @@ component in the right Discussion category and the site picks it up.
 - **Component upload size** ≤ 25 MB total per `.ctkcomp`.
 - **Embedded images** inside the component ≤ 5 MB each.
 - **Preview screenshot** ≤ 1 MB PNG. Square (1:1) renders best.
-- **Pick the right category** from the dropdown. If none of the seven
-  fit, default to `templates` and we'll triage from there.
+- **Pick the right category** from the dropdown:
+  - **Buttons** — stylized buttons (icon, toggle, action groups)
+  - **Inputs** — Entry / Combobox / Checkbox / Slider variations
+  - **Forms** — multi-field configurations (login, signup, settings, contact)
+  - **Layout** — grid / row / column containers, splitters, scroll areas
+  - **Navigation** — sidebars, top bars, tab strips, breadcrumbs, menu drawers
+  - **Dialogs & Modals** — alerts, confirms, file pickers, settings popups
+  - **Cards & Panels** — info / profile / stat tiles, collapsible panels
+  - **Mini-Apps** — full small applications (todo, calculator, calendar, music player)
+  - **Templates & Starters** — empty skeletons (sidebar+content shell, tab shell, blank window)
+  - **Other** — anything that doesn't fit above
 
 ## What gets removed
 

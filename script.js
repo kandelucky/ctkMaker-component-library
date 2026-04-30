@@ -30,26 +30,54 @@ async function loadIndex() {
   }
 }
 
+// Categories are objects: {id, name, description}. The synthetic "all"
+// entry is prepended at render time so the data file only carries
+// real categories. Tooltip + the description line under the controls
+// both feed off the same `description` field.
+const ALL_CATEGORY = {
+  id: "all",
+  name: "All",
+  description: "Browse every published component.",
+};
+
+function categoryById(id) {
+  if (id === "all") return ALL_CATEGORY;
+  return state.categories.find((c) => c.id === id) || ALL_CATEGORY;
+}
+
 function renderCategories() {
-  const cats = ["all", ...state.categories];
+  const cats = [ALL_CATEGORY, ...state.categories];
   $categories.innerHTML = "";
   for (const cat of cats) {
     const btn = document.createElement("button");
-    btn.className = "cat-btn" + (cat === state.activeCategory ? " active" : "");
-    btn.textContent = cat;
+    btn.className = "cat-btn" + (cat.id === state.activeCategory ? " active" : "");
+    btn.textContent = cat.name;
+    btn.title = cat.description;
     btn.addEventListener("click", () => {
-      state.activeCategory = cat;
+      state.activeCategory = cat.id;
       renderCategories();
+      renderCategoryDescription();
       renderGrid();
     });
     $categories.appendChild(btn);
   }
+  renderCategoryDescription();
+}
+
+function renderCategoryDescription() {
+  const $desc = document.getElementById("category-desc");
+  if (!$desc) return;
+  const cat = categoryById(state.activeCategory);
+  $desc.textContent = cat.description;
 }
 
 function filterComponents() {
   const q = state.query.trim().toLowerCase();
   const matched = state.components.filter((c) => {
-    if (state.activeCategory !== "all" && c.category !== state.activeCategory) {
+    if (
+      state.activeCategory !== "all"
+      && (c.category || "").toLowerCase() !== state.activeCategory
+    ) {
       return false;
     }
     if (!q) return true;
@@ -145,7 +173,10 @@ function renderCard(c) {
   if (c.size_px) addDetail(details, "ruler", c.size_px);
   if (c.size_kb) addDetail(details, "hard-drive", `${c.size_kb} KB`);
   if (c.added_at) addDetail(details, "calendar", formatDate(c.added_at));
-  if (c.category) addDetail(details, "tag", c.category, "tag");
+  if (c.category) {
+    const catLabel = categoryById(c.category).name;
+    addDetail(details, "tag", catLabel, "tag");
+  }
   if (details.children.length > 0) body.appendChild(details);
 
   // Reactions row — only rendered when the Discussions sync populated
