@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Browse Components — CTkMaker Hub</title>
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="notice" role="status">
+    <strong>Beta —</strong> free upload and download, no registration. Policy may change later.
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="" class="brand-logo" />
+      <div class="brand-text">
+        <h1>CTkMaker Hub</h1>
+        <p class="tagline">Community components for CTkMaker</p>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">Home</a>
+      <a href="library.html" class="active">Browse</a>
+      <a href="https://github.com/kandelucky/ctk_maker" target="_blank" rel="noopener">CTkMaker</a>
+    </nav>
+    <div class="topbar-actions">
+      <a class="upload-btn" href="https://github.com/kandelucky/ctk_maker/discussions/new?category=components" target="_blank" rel="noopener">
+        Upload Component
+      </a>
+      <a class="github-link" href="https://github.com/kandelucky/ctkMaker-component-library" target="_blank" rel="noopener">
+        View on GitHub
+      </a>
+    </div>
+  </header>
+
+  <section class="controls">
+    <input
+      id="search"
+      class="search"
+      type="text"
+      placeholder="Search components..."
+      autocomplete="off"
+    />
+    <select id="sort" class="sort" aria-label="Sort components">
+      <option value="featured">Featured</option>
+      <option value="newest">Newest</option>
+      <option value="name">Name (A-Z)</option>
+    </select>
+    <div id="categories" class="categories"></div>
+  </section>
+
+  <p id="category-desc" class="category-desc"></p>
+
+  <main id="grid" class="grid" aria-busy="true">
+    <p class="loading">Loading components...</p>
+  </main>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <img id="lightbox-img" alt="" />
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close">×</button>
+  </div>
+
+  <footer class="footer">
+    <p>
+      All components are released under the
+      <a href="https://github.com/kandelucky/ctkMaker-component-library/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>.
+      Want to share one?
+      <a href="https://github.com/kandelucky/ctkMaker-component-library/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">
+        Read the contribution guide
+      </a>.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

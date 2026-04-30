@@ -3,67 +3,170 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CTkMaker Hub — Community components for CTkMaker</title>
+  <title>CTkMaker Hub — Drag-and-drop UI builder for CustomTkinter</title>
+  <link rel="icon" type="image/png" href="assets/icon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="landing">
   <div class="notice" role="status">
-    <strong>Beta —</strong> free upload and download, no registration. Policy may change later.
+    <strong>Beta —</strong> CTkMaker and the Hub are both in active development. Things may change.
   </div>
 
   <header class="topbar">
-    <div class="brand">
-      <h1>CTkMaker Hub</h1>
-      <p class="tagline">Community components for CTkMaker</p>
-    </div>
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="" class="brand-logo" />
+      <div class="brand-text">
+        <h1>CTkMaker Hub</h1>
+        <p class="tagline">Drag-and-drop UI builder for CustomTkinter</p>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html" class="active">Home</a>
+      <a href="library.html">Browse</a>
+      <a href="https://github.com/kandelucky/ctk_maker" target="_blank" rel="noopener">CTkMaker</a>
+    </nav>
     <div class="topbar-actions">
-      <a class="upload-btn" href="https://github.com/kandelucky/ctk_maker/discussions/new?category=components" target="_blank" rel="noopener">
-        Upload Component
-      </a>
       <a class="github-link" href="https://github.com/kandelucky/ctkMaker-component-library" target="_blank" rel="noopener">
         View on GitHub
       </a>
     </div>
   </header>
 
-  <section class="controls">
-    <input
-      id="search"
-      class="search"
-      type="text"
-      placeholder="Search components..."
-      autocomplete="off"
-    />
-    <select id="sort" class="sort" aria-label="Sort components">
-      <option value="featured">Featured</option>
-      <option value="newest">Newest</option>
-      <option value="name">Name (A-Z)</option>
-    </select>
-    <div id="categories" class="categories"></div>
+  <section class="hero">
+    <div class="hero-text">
+      <h2>Build CustomTkinter UIs visually.</h2>
+      <p class="hero-sub">
+        CTkMaker is a drag-and-drop visual designer for CustomTkinter — design forms,
+        wire variables, preview live, and export clean Python code.
+        Share what you build through the community Hub.
+      </p>
+      <div class="hero-cta">
+        <a class="cta primary" href="https://github.com/kandelucky/ctk_maker" target="_blank" rel="noopener">
+          Download CTkMaker
+        </a>
+        <a class="cta secondary" href="library.html">
+          Browse Components
+        </a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="carousel" aria-label="CTkMaker screenshots">
+        <button class="carousel-nav prev" aria-label="Previous screenshot">‹</button>
+        <div class="carousel-track" id="carousel-track">
+          <img src="assets/screenshots/1.png" alt="CTkMaker screenshot 1" class="carousel-slide active" />
+          <img src="assets/screenshots/2.png" alt="CTkMaker screenshot 2" class="carousel-slide" />
+          <img src="assets/screenshots/3.png" alt="CTkMaker screenshot 3" class="carousel-slide" />
+          <img src="assets/screenshots/4.png" alt="CTkMaker screenshot 4" class="carousel-slide" />
+          <img src="assets/screenshots/5.png" alt="CTkMaker screenshot 5" class="carousel-slide" />
+        </div>
+        <button class="carousel-nav next" aria-label="Next screenshot">›</button>
+        <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+    </div>
   </section>
 
-  <p id="category-desc" class="category-desc"></p>
+  <section class="section">
+    <h3 class="section-title">What is CTkMaker?</h3>
+    <p class="section-lead">
+      A visual builder for Python developers using CustomTkinter. Skip the manual
+      <code>grid()</code> juggling — drag widgets onto the canvas, edit properties in
+      a familiar inspector, and let the builder generate the boilerplate.
+    </p>
+    <div class="feature-grid">
+      <div class="feature">
+        <h4>Visual canvas</h4>
+        <p>Drag, drop, snap, and align widgets just like a desktop UI designer.</p>
+      </div>
+      <div class="feature">
+        <h4>Variables &amp; bindings</h4>
+        <p>Global and local variables with cross-document copy and scoped exporter.</p>
+      </div>
+      <div class="feature">
+        <h4>Live preview</h4>
+        <p>Run the form in a real CTk window without leaving the builder.</p>
+      </div>
+      <div class="feature">
+        <h4>Clean Python export</h4>
+        <p>Generated code is readable — no obfuscated runtime, no hidden framework.</p>
+      </div>
+      <div class="feature">
+        <h4>Reusable components</h4>
+        <p>Save any selection as a <code>.ctkcomp.zip</code> with assets bundled in.</p>
+      </div>
+      <div class="feature">
+        <h4>Free &amp; open</h4>
+        <p>Open-source builder, MIT-licensed components, no account required.</p>
+      </div>
+    </div>
+  </section>
 
-  <main id="grid" class="grid" aria-busy="true">
-    <p class="loading">Loading components...</p>
-  </main>
+  <section class="section section-alt">
+    <h3 class="section-title">See it in action</h3>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/aqz-KE-bpKQ"
+        title="CTkMaker demo (placeholder)"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <p class="video-note">Demo video coming soon — placeholder embed for now.</p>
+  </section>
 
-  <div id="lightbox" class="lightbox" hidden>
-    <img id="lightbox-img" alt="" />
-    <button id="lightbox-close" class="lightbox-close" aria-label="Close">×</button>
-  </div>
+  <section class="section">
+    <h3 class="section-title">What is the Hub?</h3>
+    <p class="section-lead">
+      The Hub is a community library of components built in CTkMaker. Anyone can
+      browse and download <code>.ctkcomp.zip</code> files — buttons, forms, mini-apps,
+      starters — and drop them straight into their own project.
+    </p>
+    <div class="hub-row">
+      <a class="hub-card" href="library.html">
+        <h4>Browse the library →</h4>
+        <p>Filter by category, sort by featured / newest, preview screenshots, and download.</p>
+      </a>
+      <a class="hub-card" href="https://github.com/kandelucky/ctk_maker/discussions/new?category=components" target="_blank" rel="noopener">
+        <h4>Share your work →</h4>
+        <p>Publish from the builder, drop the file in a GitHub Discussion, see it on the site within ~30 minutes.</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <h3 class="section-title">How to contribute</h3>
+    <ol class="steps">
+      <li>
+        <strong>Build it.</strong> Design your component in CTkMaker.
+        Right-click the selection → <em>Save as component…</em>
+      </li>
+      <li>
+        <strong>Publish it.</strong> Click <em>Publish to Community</em>, sign the MIT
+        agreement, pick a category, write a one-line description.
+      </li>
+      <li>
+        <strong>Post it.</strong> Open a new Discussion in the
+        <a href="https://github.com/kandelucky/ctk_maker/discussions/new?category=components" target="_blank" rel="noopener">Components</a>
+        category, drag the file + a screenshot in, hit submit.
+      </li>
+    </ol>
+    <p class="steps-foot">
+      Within ~30 minutes the sync workflow picks it up and your card appears on the
+      <a href="library.html">library</a>. Full details:
+      <a href="https://github.com/kandelucky/ctkMaker-component-library/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a>.
+    </p>
+  </section>
 
   <footer class="footer">
     <p>
       All components are released under the
       <a href="https://github.com/kandelucky/ctkMaker-component-library/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>.
-      Want to share one?
-      <a href="https://github.com/kandelucky/ctkMaker-component-library/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">
-        Read the contribution guide
-      </a>.
+      CTkMaker is built on
+      <a href="https://github.com/TomSchimansky/CustomTkinter" target="_blank" rel="noopener">CustomTkinter</a>
+      by Tom Schimansky.
     </p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="landing.js"></script>
 </body>
 </html>
