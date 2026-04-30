@@ -558,6 +558,20 @@ a:hover { color: var(--accent-hover); }
   margin: 0;
 }
 
+.section-cta {
+  background: linear-gradient(180deg, rgba(91, 192, 248, 0.06), transparent);
+  border-left: 3px solid var(--accent);
+  padding-left: 29px;
+}
+.section-cta .cta-card {
+  border-color: var(--accent);
+  background: var(--panel);
+}
+.section-cta .cta-card:hover {
+  background: var(--panel-2);
+  border-color: var(--accent-hover);
+}
+
 .section-title {
   margin: 0 0 12px 0;
   font-size: 24px;
