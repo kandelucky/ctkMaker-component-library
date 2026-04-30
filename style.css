@@ -55,6 +55,12 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-muted);
 }
 
+.topbar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .github-link {
   padding: 8px 14px;
   border: 1px solid var(--border);
@@ -66,6 +72,21 @@ a:hover { color: var(--accent-hover); }
 .github-link:hover {
   background: var(--border);
   color: var(--text-strong);
+}
+
+.upload-btn {
+  padding: 8px 16px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0a0a0a;
+}
+.upload-btn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #0a0a0a;
 }
 
 .notice {
