@@ -204,16 +204,20 @@ a:hover { color: var(--accent-hover); }
 
 .card .preview {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  background: var(--panel-2);
+  aspect-ratio: 4 / 3;
+  background-color: var(--panel-2);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-muted);
   font-size: 12px;
   border-bottom: 1px solid var(--border);
-  background-size: cover;
+  /* "contain" keeps the whole screenshot visible — submitters use a
+     mix of aspect ratios, and "cover" was clipping vertical UIs.
+     Padding may show on extreme ratios, that's the trade-off. */
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .card .body {

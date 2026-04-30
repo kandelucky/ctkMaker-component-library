@@ -25,7 +25,10 @@ component in the right Discussion category and the site picks it up.
   components, post them separately so each lands on its own card.
 - **Component upload size** ≤ 25 MB total per `.ctkcomp`.
 - **Embedded images** inside the component ≤ 5 MB each.
-- **Preview screenshot** ≤ 1 MB PNG. Square (1:1) renders best.
+- **Preview screenshot** ≤ 1 MB PNG. The Hub displays previews in a
+  **4 : 3** frame — `1280 × 960` is the sweet spot, `1920 × 1440`
+  is the upper end. Other ratios are letterboxed (not cropped) so
+  vertical login forms or wide toolbars still show in full.
 - **Pick the right category** from the dropdown:
   - **Buttons** — stylized buttons (icon, toggle, action groups)
   - **Inputs** — Entry / Combobox / Checkbox / Slider variations
