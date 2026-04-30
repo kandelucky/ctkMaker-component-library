@@ -13,46 +13,5 @@
     "feedback",
     "templates"
   ],
-  "components": [
-    {
-      "id": "demo_button",
-      "name": "Demo Button",
-      "category": "buttons",
-      "author": "kandelucky",
-      "version": "1.0",
-      "description": "Placeholder card — replace with a real component once exported.",
-      "file": "components/demo_button.ctkcomp",
-      "preview": "components/demo_button.png",
-      "size_px": "200x40",
-      "size_kb": 4,
-      "added_at": "2026-04-30",
-      "featured": true
-    },
-    {
-      "id": "demo_layout",
-      "name": "Demo Layout",
-      "category": "layout",
-      "author": "kandelucky",
-      "version": "1.0",
-      "description": "Placeholder card — replace with a real component once exported.",
-      "file": "components/demo_layout.ctkcomp",
-      "preview": "components/demo_layout.png",
-      "size_px": "320x240",
-      "size_kb": 8,
-      "added_at": "2026-04-29"
-    },
-    {
-      "id": "demo_input",
-      "name": "Demo Input",
-      "category": "inputs",
-      "author": "kandelucky",
-      "version": "1.0",
-      "description": "Placeholder card — replace with a real component once exported.",
-      "file": "components/demo_input.ctkcomp",
-      "preview": "components/demo_input.png",
-      "size_px": "240x32",
-      "size_kb": 3,
-      "added_at": "2026-04-28"
-    }
-  ]
+  "components": []
 }
