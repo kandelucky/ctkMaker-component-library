@@ -133,12 +133,33 @@ function renderCard(c) {
   const details = document.createElement("div");
   details.className = "details";
   if (c.size_px) addDetail(details, "ruler", c.size_px);
-  if (c.size_kb !== undefined && c.size_kb !== null) {
-    addDetail(details, "hard-drive", `${c.size_kb} KB`);
-  }
+  if (c.size_kb) addDetail(details, "hard-drive", `${c.size_kb} KB`);
   if (c.added_at) addDetail(details, "calendar", formatDate(c.added_at));
   if (c.category) addDetail(details, "tag", c.category, "tag");
   if (details.children.length > 0) body.appendChild(details);
+
+  // Reactions row — only rendered when the Discussions sync populated
+  // the fields, so static/legacy entries fall through silently.
+  if (c.likes !== undefined || c.comments !== undefined || c.discussion_url) {
+    const social = document.createElement("div");
+    social.className = "details social";
+    if (c.likes !== undefined) {
+      addDetail(social, "thumbs-up", String(c.likes || 0));
+    }
+    if (c.comments !== undefined) {
+      addDetail(social, "message-square", String(c.comments || 0));
+    }
+    if (c.discussion_url) {
+      const link = document.createElement("a");
+      link.className = "detail discuss-link";
+      link.href = c.discussion_url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Discuss →";
+      social.appendChild(link);
+    }
+    body.appendChild(social);
+  }
 
   if (c.description) {
     const desc = document.createElement("p");

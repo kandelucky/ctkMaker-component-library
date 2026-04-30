@@ -231,6 +231,18 @@ a:hover { color: var(--accent-hover); }
   color: var(--accent);
 }
 
+.card .details.social {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 2px;
+}
+
+.card .discuss-link {
+  margin-left: auto;
+  color: var(--accent);
+}
+.card .discuss-link:hover { color: var(--accent-hover); }
+
 .card .icon {
   width: 14px;
   height: 14px;
