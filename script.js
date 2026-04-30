@@ -126,7 +126,17 @@ function renderCard(c) {
     const authorRow = document.createElement("div");
     authorRow.className = "author-row";
     authorRow.appendChild(makeIcon("user"));
-    authorRow.appendChild(document.createTextNode(`by ${c.author}`));
+    const text = c.license
+      ? `by ${c.author} · ${c.license.type}`
+      : `by ${c.author}`;
+    authorRow.appendChild(document.createTextNode(text));
+    if (c.license && c.license.accepted_at) {
+      const sig = document.createElement("span");
+      sig.className = "license-sig";
+      sig.textContent = ` · signed ${formatDate(c.license.accepted_at)}`;
+      sig.title = `Agreement v${c.license.text_version || 1} accepted on ${c.license.accepted_at}`;
+      authorRow.appendChild(sig);
+    }
     body.appendChild(authorRow);
   }
 

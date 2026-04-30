@@ -13,12 +13,14 @@ plus manual ``workflow_dispatch``. Token comes from the action's
 
 from __future__ import annotations
 
+import io
 import json
 import os
 import re
 import sys
 import urllib.error
 import urllib.request
+import zipfile
 from pathlib import Path
 
 REPO_OWNER = "kandelucky"
@@ -140,11 +142,70 @@ def slug(name: str) -> str:
     return cleaned or "component"
 
 
-def discussion_to_entry(d: dict) -> dict | None:
-    """Transform one Discussion node into an ``index.json`` entry. Returns
-    ``None`` when no ``.ctkcomp`` URL is detected — the post is then
-    dropped from the index instead of polluting the grid with broken
-    download links.
+def fetch_component_metadata(url: str, token: str) -> dict | None:
+    """Download a `.ctkcomp` zip from ``url`` and return its parsed
+    ``component.json``. Returns ``None`` on HTTP failure, malformed
+    zip, or missing payload — the caller drops the entry instead.
+
+    GitHub user-attachment URLs are public but want a User-Agent and
+    sometimes accept a Bearer token for higher rate limits, so we
+    pass both.
+    """
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "ctkmaker-hub-sync",
+            "Accept": "application/octet-stream",
+            "Authorization": f"Bearer {token}",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = resp.read()
+    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError):
+        return None
+    try:
+        zf = zipfile.ZipFile(io.BytesIO(data))
+        with zf.open("component.json") as inner:
+            return json.loads(inner.read().decode("utf-8"))
+    except (zipfile.BadZipFile, KeyError, json.JSONDecodeError, UnicodeDecodeError):
+        return None
+
+
+def license_summary(payload: dict) -> dict | None:
+    """Pull a clean license summary out of the component.json payload.
+    Returns ``None`` when the license block is missing, malformed, or
+    lacks the three confirmation flags — those entries are excluded
+    from index.json so the site can't render unsigned components.
+    """
+    block = payload.get("license")
+    if not isinstance(block, dict):
+        return None
+    confirmations = block.get("confirmations") or {}
+    if not all(
+        confirmations.get(k) is True
+        for k in ("rights", "mit_release", "responsibility")
+    ):
+        return None
+    return {
+        "type": str(block.get("type") or "MIT"),
+        "accepted_by": str(block.get("accepted_by") or ""),
+        "accepted_at": str(block.get("accepted_at") or ""),
+        "text_version": int(block.get("text_version") or 1),
+    }
+
+
+def discussion_to_entry(d: dict, token: str) -> dict | None:
+    """Transform one Discussion node into an ``index.json`` entry.
+    Returns ``None`` when:
+
+    - the body has no ``.ctkcomp`` URL,
+    - the file can't be downloaded,
+    - the file lacks a valid ``license`` block with all three
+      confirmations checked.
+
+    Excluded entries are dropped quietly — the sync log notes them so
+    the maintainer can chase down truly broken posts manually.
     """
     body = d.get("body") or ""
     sections = parse_form_sections(body)
@@ -153,6 +214,15 @@ def discussion_to_entry(d: dict) -> dict | None:
     if not ctkcomp_match:
         return None
     ctkcomp_url = ctkcomp_match.group(2)
+
+    payload = fetch_component_metadata(ctkcomp_url, token)
+    if payload is None:
+        print(f"  skip d#{d.get('number')}: component.json unreadable")
+        return None
+    lic = license_summary(payload)
+    if lic is None:
+        print(f"  skip d#{d.get('number')}: missing/invalid license block")
+        return None
 
     preview_url = ""
     img_md = IMAGE_MD_RE.search(body)
@@ -169,14 +239,30 @@ def discussion_to_entry(d: dict) -> dict | None:
     if title.lower().startswith("[component]"):
         title = title[len("[component]"):].strip()
 
-    name = sections.get("display name") or title or "Untitled"
+    name = (
+        sections.get("display name")
+        or payload.get("name")
+        or title
+        or "Untitled"
+    )
     category = (sections.get("component type") or "").strip().lower() or "templates"
     description = sections.get("description") or ""
 
-    author = (d.get("author") or {}).get("login") or "anonymous"
+    author = (
+        lic["accepted_by"]
+        or payload.get("author")
+        or (d.get("author") or {}).get("login")
+        or "anonymous"
+    )
     likes = (d.get("reactions") or {}).get("totalCount") or 0
     comments = (d.get("comments") or {}).get("totalCount") or 0
     created = d.get("createdAt", "")[:10]
+
+    view = payload.get("view_size") or {}
+    size_px = (
+        f"{view.get('w', 0)}x{view.get('h', 0)}"
+        if view else ""
+    )
 
     return {
         "id": f"d{d['number']}_{slug(name)}",
@@ -187,22 +273,23 @@ def discussion_to_entry(d: dict) -> dict | None:
         "description": description,
         "file": ctkcomp_url,
         "preview": preview_url,
-        "size_px": "",
+        "size_px": size_px,
         "size_kb": 0,
         "added_at": created,
         "discussion_url": d.get("url", ""),
         "likes": likes,
         "comments": comments,
+        "license": lic,
     }
 
 
-def build_index(discussions: list[dict]) -> list[dict]:
+def build_index(discussions: list[dict], token: str) -> list[dict]:
     entries: list[dict] = []
     for d in discussions:
         cat = (d.get("category") or {}).get("name") or ""
         if cat != CATEGORY_NAME:
             continue
-        entry = discussion_to_entry(d)
+        entry = discussion_to_entry(d, token)
         if entry is not None:
             entries.append(entry)
     return entries
@@ -219,7 +306,7 @@ def main() -> int:
         print(f"Discussion fetch failed: {exc}", file=sys.stderr)
         return 3
 
-    components = build_index(discussions)
+    components = build_index(discussions, token)
 
     if INDEX_PATH.exists():
         index = json.loads(INDEX_PATH.read_text(encoding="utf-8"))

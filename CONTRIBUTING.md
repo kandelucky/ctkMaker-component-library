@@ -47,5 +47,21 @@ component in the right Discussion category and the site picks it up.
 
 ## License
 
-By posting a component you agree it can be redistributed under this
-repo's license.
+Every component in this library is **MIT-licensed**. The license
+agreement happens once, inside CTkMaker, when you click
+"Publish to Community" — you confirm three things:
+
+1. You have the right to redistribute everything in your component.
+2. You release it under the MIT License (anyone can use, modify,
+   and redistribute).
+3. Responsibility for the contents stays with you, the submitter.
+
+The Builder writes a signed `license` block into your `.ctkcomp`
+file. The Hub's sync workflow reads it back and only publishes
+components whose license block confirms all three. **Components
+without a valid license block are skipped silently** — the upload
+is on the Discussion thread but won't appear on the site.
+
+This means you cannot publish via a hand-crafted `.ctkcomp` that
+bypasses the Builder dialog. If you have a legitimate reason for
+that, open an issue first.
