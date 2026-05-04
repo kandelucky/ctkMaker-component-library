@@ -58,6 +58,28 @@
   ],
   "components": [
     {
+      "id": "d6_calculator_tutorial",
+      "name": "Calculator (Tutorial)",
+      "category": "mini-apps",
+      "author": "Kandelucky",
+      "version": "1.0",
+      "description": "Windows style calculator with comments for tutorial.",
+      "file": "https://github.com/user-attachments/files/27372501/Calculator.Tutorial.ctkcomp.zip",
+      "preview": "https://github.com/user-attachments/assets/751dfd82-510f-4206-a0bc-19bbe2dd4e41",
+      "size_px": "360x600",
+      "size_kb": 0,
+      "added_at": "2026-05-04",
+      "discussion_url": "https://github.com/kandelucky/ctk_maker/discussions/6",
+      "likes": 0,
+      "comments": 0,
+      "license": {
+        "type": "MIT",
+        "accepted_by": "Kandelucky",
+        "accepted_at": "2026-05-04T18:34:07Z",
+        "text_version": 1
+      }
+    },
+    {
       "id": "d3_loginform",
       "name": "LoginForm",
       "category": "forms",
